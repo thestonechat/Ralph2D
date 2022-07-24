@@ -1,36 +1,48 @@
-import sys
-import ctypes
-from sdl2 import *
-from sdl2 import ext
-import sdl2
 import time
+import pygame
+import os
+import pathlib
 
 class Window():
     def __init__(self, title='', width=255, height=255):
-        self.empty = ext.Color(0,0,0)
-        win_flags = (
-            sdl2.SDL_WINDOW_OPENGL | sdl2.SDL_WINDOW_SHOWN
-        )
-        self.window = ext.Window(title, (width, height), flags=win_flags)
-        self.surface = self.window.get_surface()
+        self.path = str(pathlib.Path(__file__).parent.resolve())
+        self.title = title
 
-    def update(self):
-        self.window.refresh()
+        self.display = pygame.display
+        self.window = self.display.set_mode((width, height))
+        self.surface = self.display.get_surface()
+
+        self.display.set_caption(title)
+        icon_surface = pygame.image.load(self.path + '/icon.jpg')
+        self.display.set_icon(icon_surface)
 
     def quit(self):
-        SDL_DestroyWindow(self.window)
-        SDL_Quit()
+        pygame.display.quit()
+
+    def update(self):
+        pygame.display.update()
+
+    def set_title(self, title=''):
+        self.title = title
+        self.display.set_caption(title)
 
 
 
     def clear(self):
-        ext.fill(self.surface, self.empty)
+        self.window.fill((0, 0, 0))
 
     def draw_rectangle(self, color, x, y, width, height):
-        ext.fill(self.surface, color, (x, y, width, height))
+        pygame.draw.rect(self.window, color, pygame.Rect(x, y, width, height))
 
 
 
 
-def Color(r=255, g=255, b=255):
-    return ext.Color(r, g, b)
+def limit_fps(fps=60, time_passed=0):
+    '''
+        WARNING: Actually affects FPS (not a joke)
+
+        time_passed = Time it took to complete a loop
+    '''
+    sleep_size = 1/fps-time_passed
+    if sleep_size >= 0:
+        time.sleep(sleep_size)

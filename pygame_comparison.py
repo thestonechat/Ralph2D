@@ -1,9 +1,8 @@
 import pygame
 import time
-
-pygame.init()
   
 surface = pygame.display.set_mode((512,512))
+pygame.display.set_caption('PYGAME WINDOW')
   
 white_color = pygame.Color(199, 147, 129)
 black_color = pygame.Color(173, 79, 47)
@@ -27,9 +26,7 @@ def draw_chess_board():
 
 last_frame_time = time.time()
 while True:
-
     draw_chess_board()
     pygame.display.update()
-
     print(f'{1/(time.time()-last_frame_time)} FPS')
     last_frame_time = time.time()
