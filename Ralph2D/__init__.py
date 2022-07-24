@@ -13,7 +13,7 @@ class Window():
         self.surface = self.display.get_surface()
 
         self.display.set_caption(title)
-        icon_surface = pygame.image.load(self.path + '/icon.jpg')
+        icon_surface = pygame.image.load(self.path + '/icon.png')
         self.display.set_icon(icon_surface)
 
     def quit(self):
@@ -31,8 +31,15 @@ class Window():
     def clear(self):
         self.window.fill((0, 0, 0))
 
-    def draw_rectangle(self, color, x, y, width, height):
-        pygame.draw.rect(self.window, color, pygame.Rect(x, y, width, height))
+    def draw_rectangle(self, color, x, y, width, height, thickness=0, border_radius=-1, top_left_radius=-1,
+                       top_right_radius=-1, bottom_left_radius=-1, bottom_right_radius=-1):
+
+        pygame.draw.rect(self.window, color, pygame.Rect(x, y, width, height), width=thickness,
+                         border_radius=border_radius, border_top_left_radius=top_left_radius, border_top_right_radius=top_right_radius,
+                         border_bottom_left_radius=bottom_left_radius, border_bottom_right_radius=bottom_right_radius)
+
+    def draw_circle(self, color, x, y, radius, thickness=0):
+        pygame.draw.circle(self.window, color, (x, y), radius, thickness)
 
 
 

@@ -25,6 +25,7 @@ def draw_chess_board():
 
 last_frame_time = time.time()
 while True:
+    window.clear()
     draw_chess_board()
     window.update()
 
