@@ -4,7 +4,7 @@ Ralph2D is a game engine built on top of pygame (for now 😉)
 
 
 ## Features
-#
+
 ### General (1)
  - Limit FPS
 ### Window (8)
