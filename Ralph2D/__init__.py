@@ -26,6 +26,10 @@ class Window():
         self.title = title
         self.display.set_caption(title)
 
+    def set_icon(self, path_to_icon):
+        icon_surface = pygame.image.load(path_to_icon)
+        self.display.set_icon(icon_surface)
+
 
 
     def clear(self):
