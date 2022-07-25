@@ -9,6 +9,7 @@ Ralph2D is a game engine built on top of pygame (for now 😉)
  - Clock (FPS Limiter)
  - Load Images
  - Rotate Surface
+ - Resize Images
 ### Window (8)
  - Create Window
  - Quit Window
@@ -23,5 +24,4 @@ Ralph2D is a game engine built on top of pygame (for now 😉)
 
 
 ## TODO
- - Resize Images
  - Objects
