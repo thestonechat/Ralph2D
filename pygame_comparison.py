@@ -1,32 +1,24 @@
 import pygame
 import time
   
-surface = pygame.display.set_mode((512,512))
+surface = pygame.display.set_mode((500, 500))
+clock = pygame.time.Clock()
 pygame.display.set_caption('PYGAME WINDOW')
-  
-white_color = pygame.Color(199, 147, 129)
-black_color = pygame.Color(173, 79, 47)
 
-def draw_chess_board():
-    for i in range(8):
-        for n in range(8):
-            x = n*64
-            y = i*64
-
-            if i % 2 == 0:
-                if n % 2 == 0:
-                    pygame.draw.rect(surface, black_color, pygame.Rect(x, y, 64, 64))
-                else:
-                    pygame.draw.rect(surface, white_color, pygame.Rect(x, y, 64, 64))
-            else:
-                if n % 2 == 0:
-                    pygame.draw.rect(surface, white_color, pygame.Rect(x, y, 64, 64))
-                else:
-                    pygame.draw.rect(surface, black_color, pygame.Rect(x, y, 64, 64))
+image = pygame.image.load('ship.gif')
 
 last_frame_time = time.time()
+angle = 0
 while True:
-    draw_chess_board()
+    surface.fill(0)
+
+    rotated_surface = pygame.transform.rotate(image, angle)
+    rect = rotated_surface.get_rect(center = (image.get_width()/2+50, image.get_height()/2+50))
+    surface.blit(rotated_surface, (rect.x, rect.y))
+    angle += 1
+
     pygame.display.update()
+
     print(f'{1/(time.time()-last_frame_time)} FPS')
     last_frame_time = time.time()
+    clock.tick(60)

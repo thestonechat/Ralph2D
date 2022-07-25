@@ -1,33 +1,33 @@
 import Ralph2D as ralph
 import time
 
-window = ralph.Window(title='EPIC WINDOW', width=512, height=512)
+window = ralph.Window(title='Image Test', width=500, height=500)
+clock = ralph.Clock()
 
-white_color = (199, 147, 129)
-black_color = (173, 79, 47)
-
-def draw_chess_board():
-    for i in range(8):
-        for n in range(8):
-            x = n*64
-            y = i*64
-
-            if i % 2 == 0:
-                if n % 2 == 0:
-                    window.draw_rectangle(black_color, x, y, 64, 64)
-                else:
-                    window.draw_rectangle(white_color, x, y, 64, 64)
-            else:
-                if n % 2 == 0:
-                    window.draw_rectangle(white_color, x, y, 64, 64)
-                else:
-                    window.draw_rectangle(black_color, x, y, 64, 64)
+test_img = ralph.load_image('ship.gif')
 
 last_frame_time = time.time()
+reverse = False
+size = 0
 while True:
     window.clear()
-    draw_chess_board()
-    window.update()
 
+    if reverse == False:
+        size+=1
+        if not size < 50:
+            reverse = True
+            size-=1
+    else:
+        size-=1
+        if not size > 0:
+            reverse = False
+            size+=1
+    
+    smaller_img = ralph.resize_image(test_img, test_img.get_width()-size, test_img.get_height()-size)
+    window.draw_image_centered(smaller_img, 50, 50, original_width=test_img.get_width(), original_height=test_img.get_height())
+
+    window.update()
+    
     print(f'{1/(time.time()-last_frame_time)} FPS')
     last_frame_time = time.time()
+    clock.tick(60)
