@@ -23,10 +23,10 @@ Ralph2D is a game engine built on top of pygame (for now 😉)
  - Mouse Position
  - Keys down
  - Keys up
-### Objects (2)
+### Objects (3)
  - Rectangle Object
  - Circle Object
+ - Image Object
 ### Physics (1)
  - Collision Detection
-## TODO (1)
- - Image Object
+## TODO (0)
