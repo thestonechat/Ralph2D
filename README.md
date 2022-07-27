@@ -10,7 +10,7 @@ Ralph2D is a game engine built on top of pygame (for now 😉)
  - Load Images
  - Rotate Surface
  - Resize Images
-### Window (9)
+### Window (12)
  - Create Window
  - Quit Window
  - Update Window
@@ -20,5 +20,9 @@ Ralph2D is a game engine built on top of pygame (for now 😉)
  - Draw Rectangle
  - Draw Circle
  - Draw Images
-## TODO (1)
- - Objects
+ - Mouse Position
+ - Keys down
+ - Keys up
+### Objects (1)
+ - Rectangle Object
+## TODO (0)

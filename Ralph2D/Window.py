@@ -14,11 +14,25 @@ class Window():
         icon_surface = pygame.image.load(self.path + '/media/icon.png')
         self.display.set_icon(icon_surface)
 
+        self.last_mouse_position = (0, 0)
+        self.keydown = []
+        self.keyup = []
+
     def quit(self):
         pygame.display.quit()
 
     def update(self):
-        pygame.display.flip()
+        self.keydown = []
+        self.keyup = []
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                self.keydown.append(pygame.key.name(event.key))
+            elif event.type == pygame.KEYUP:
+                self.keyup.append(pygame.key.name(event.key))
+            elif event.type == pygame.MOUSEMOTION:
+                self.last_mouse_position = pygame.mouse.get_pos()
+        pygame.display.update()
+        # pygame.display.flip()
 
     def set_title(self, title=''):
         self.title = title
@@ -27,6 +41,15 @@ class Window():
     def set_icon(self, path_to_icon):
         icon_surface = pygame.image.load(path_to_icon)
         self.display.set_icon(icon_surface)
+
+    def get_mouse_pos(self):
+        return self.last_mouse_position
+
+    def get_key_down(self):
+        return self.keydown
+    
+    def get_key_up(self):
+        return self.keyup
 
 
 
