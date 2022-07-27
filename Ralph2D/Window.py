@@ -17,6 +17,8 @@ class Window():
         self.last_mouse_position = (0, 0)
         self.keydown = []
         self.keyup = []
+        self.objects = []
+
 
     def quit(self):
         pygame.display.quit()
@@ -24,6 +26,7 @@ class Window():
     def update(self):
         self.keydown = []
         self.keyup = []
+        # Update the events
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 self.keydown.append(pygame.key.name(event.key))
@@ -31,8 +34,10 @@ class Window():
                 self.keyup.append(pygame.key.name(event.key))
             elif event.type == pygame.MOUSEMOTION:
                 self.last_mouse_position = pygame.mouse.get_pos()
+        # Update the objects
+        for object in self.objects:
+            object.update()
         pygame.display.update()
-        # pygame.display.flip()
 
     def set_title(self, title=''):
         self.title = title
@@ -74,3 +79,6 @@ class Window():
         rect = image.get_rect(center = (original_width/2+x, original_height/2+y))
         self.window.blit(image, (rect.x, rect.y))
 
+
+    def use_object(self, object):
+        self.objects.append(object)

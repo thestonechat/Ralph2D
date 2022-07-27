@@ -1,10 +1,10 @@
 import Ralph2D as ralph
 from Ralph2D.Physics import check_collision
 import time
-window = ralph.Window(title='Circles', width=500, height=500)
+window = ralph.Window(title='Image Test', width=500, height=500)
 clock = ralph.Clock()
-rect1 = ralph.CircleObject(window, (255, 0, 0), 50, 50, 10)
-rect2 = ralph.CircleObject(window, (0, 0, 255), 150, 50, 10)
+rect1 = ralph.RectangleObject(window, (255, 0, 0), 50, 50, 50, 50)
+rect2 = ralph.RectangleObject(window, (0, 0, 255), 150, 50, 50, 50)
 last_frame_time = time.time()
 
 rect1_keys = { 'w': False, 'a': False, 's': False, 'd': False }
@@ -41,8 +41,4 @@ while True:
         print('Collision Detected!')
 
     window.update()
-    # print(f'{1/(time.time()-last_frame_time)} FPS')
-    last_frame_time = time.time()
     clock.tick(60)
-
-
