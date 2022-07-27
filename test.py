@@ -1,48 +1,24 @@
 import Ralph2D as ralph
-from Ralph2D.Physics import check_collision
-import time
-window = ralph.Window(title='Circles', width=500, height=500)
+
+window = ralph.Window(width=500, height=500)
 clock = ralph.Clock()
-rect1 = ralph.CircleObject(window, (255, 0, 0), 50, 50, 10)
-rect2 = ralph.CircleObject(window, (0, 0, 255), 150, 50, 10)
-last_frame_time = time.time()
 
-rect1_keys = { 'w': False, 'a': False, 's': False, 'd': False }
-rect2_keys = { 'up': False, 'left': False, 'down': False, 'right': False }
+image = ralph.load_image('ship.png')
+image = ralph.resize_image(image, 100, 100)
 
-window.use_object(rect1)
-window.use_object(rect2)
+image_obj = ralph.ImageObject(window, image, 0, 0)
+
+window.use_object(image_obj)
+kets_pressed = {'w': False, 'a': False, 's': False, 'd': False}
 while True:
     window.clear()
-    mouse_pos = window.get_mouse_pos()
-    keys_down = window.get_key_down()
-    keys_up = window.get_key_up()
 
-    for key in keys_down:
-        if key in rect1_keys: rect1_keys[key] = True
-        if key in rect2_keys: rect2_keys[key] = True
-    for key in keys_up:
-        if key in rect1_keys: rect1_keys[key] = False
-        if key in rect2_keys: rect2_keys[key] = False
+    keys_down = window.get_keys_down()
+    keys_up = window.get_keys_up()
 
-    # Move rectangle 1
-    if rect1_keys['w']: rect1.move_y(-5)
-    if rect1_keys['a']: rect1.move_x(-5)
-    if rect1_keys['s']: rect1.move_y(5)
-    if rect1_keys['d']: rect1.move_x(5)
+    
 
-    # Move rectangle 2
-    if rect2_keys['up']: rect2.move_y(-5)
-    if rect2_keys['left']: rect2.move_x(-5)
-    if rect2_keys['down']: rect2.move_y(5)
-    if rect2_keys['right']: rect2.move_x(5)
-
-    if check_collision(rect1, rect2):
-        print('Collision Detected!')
+    image_obj.move_x(1)
 
     window.update()
-    # print(f'{1/(time.time()-last_frame_time)} FPS')
-    last_frame_time = time.time()
     clock.tick(60)
-
-

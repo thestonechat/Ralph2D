@@ -28,12 +28,9 @@ class Window():
         self.keyup = []
         # Update the events
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                self.keydown.append(pygame.key.name(event.key))
-            elif event.type == pygame.KEYUP:
-                self.keyup.append(pygame.key.name(event.key))
-            elif event.type == pygame.MOUSEMOTION:
-                self.last_mouse_position = pygame.mouse.get_pos()
+            if event.type == pygame.KEYDOWN: self.keydown.append(pygame.key.name(event.key))
+            elif event.type == pygame.KEYUP: self.keyup.append(pygame.key.name(event.key))
+            elif event.type == pygame.MOUSEMOTION: self.last_mouse_position = pygame.mouse.get_pos()
         # Update the objects
         for object in self.objects:
             object.update()
@@ -50,10 +47,10 @@ class Window():
     def get_mouse_pos(self):
         return self.last_mouse_position
 
-    def get_key_down(self):
+    def get_keys_down(self):
         return self.keydown
     
-    def get_key_up(self):
+    def get_keys_up(self):
         return self.keyup
 
 
